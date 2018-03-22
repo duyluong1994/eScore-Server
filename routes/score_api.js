@@ -6,7 +6,7 @@ var cheerio = require('cheerio');
 
 // GET todayMatch
 router.get('/',function (req, res) {
-    const {Builder, until} = require('selenium-webdriver');
+    /*const {Builder, until} = require('selenium-webdriver');
     let driver = new Builder()
         .forBrowser('firefox')
         .usingServer( 'http://localhost:8080/wd/hub')
@@ -32,8 +32,7 @@ router.get('/',function (req, res) {
         })
         .then(() => {
             driver.quit();
-        });
-
-    res.send();
+        });*/
+    res.render('pages/score_api');
 });
 module.exports = router;
