@@ -1,16 +1,27 @@
 var express = require('express');
 var router = express.Router();
 var cheerio = require('cheerio');
+chrome_bin = ENV.fetch('GOOGLE_CHROME_SHIM', nil);
+chrome_opts = chrome_bin ? { "chromeOptions" : { "binary" : chrome_bin } } : {};
 
 
 
 // GET todayMatch
 router.get('/',function (req, res) {
-    const {Builder, until} = require('selenium-webdriver');
+  /*  const {Builder, until} = require('selenium-webdriver');
     let driver = new Builder()
-        .forBrowser('firefox')
-        .usingServer( 'http://172.17.50.54:8080/wd/hub')
-        .build();
+        .forBrowser('chrome')
+        //
+        .build();*/
+    var webdriver = require('selenium-webdriver');
+
+    var chromeCapabilities = webdriver.Capabilities.chrome();
+//setting chrome options to start the browser fully maximized
+    var chromeOptions = {
+        'args': ['--test-type', '--start-maximized']
+    };
+    chromeCapabilities.set('chromeOptions', chrome_opts);
+    var driver = new webdriver.Builder().withCapabilities(chromeCapabilities).build();
     const hltv_url = 'https://www.hltv.org/';
 
     driver.get(hltv_url)
