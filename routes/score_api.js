@@ -9,7 +9,7 @@ router.get('/',function (req, res) {
     const {Builder, until} = require('selenium-webdriver');
     let driver = new Builder()
         .forBrowser('firefox')
-        .usingServer( 'http://localhost:8080/wd/hub')
+        .usingServer( 'http://172.17.50.54:8080/wd/hub')
         .build();
     const hltv_url = 'https://www.hltv.org/';
 
