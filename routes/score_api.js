@@ -33,7 +33,6 @@ router.get('/',function (req, res) {
         .then(() => {
             driver.quit();
         });
-
-    res.send();
+    res.render('pages/score_api');
 });
 module.exports = router;
