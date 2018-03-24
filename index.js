@@ -5,9 +5,9 @@ const PORT = process.env.PORT || 5000;
 var score_api = require('./routes/score_api');
 
 var https = require("https");
-setInterval(function() {
+/*setInterval(function() {
     https.get("https://escore-server.herokuapp.com/score_api");
-}, 50000); // ping server to get data every 30s
+}, 50000); // ping server to get data every 30s*/
 
 express()
   .use(express.static(path.join(__dirname, 'public')))
