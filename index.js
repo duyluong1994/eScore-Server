@@ -7,7 +7,7 @@ var score_api = require('./routes/score_api');
 var https = require("https");
 setInterval(function() {
     https.get("https://escore-server.herokuapp.com/");
-}, 50000); // every 30s
+}, 50000); // ping server every 30s
 
 express()
   .use(express.static(path.join(__dirname, 'public')))
