@@ -1,0 +1,1 @@
+﻿- nếu lỗi khi crawl data thiếu livescore thì thay lại workspace.xml trong .idea
