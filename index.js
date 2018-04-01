@@ -4,6 +4,7 @@ const PORT = process.env.PORT || 5000;
 
 var score_api = require('./routes/score_api');
 var index = require('./routes/index');
+var mongoose = require('mongoose');
 
 var https = require("https");
 /*setInterval(function() {
@@ -18,3 +19,4 @@ express()
     .use('/', index)
 //  .get('/', (req, res) => res.render('pages/index'))
   .listen(PORT, () => console.log(`Listening on ${ PORT }`));
+mongoose.connect('mongodb://localhost:27017/local');
