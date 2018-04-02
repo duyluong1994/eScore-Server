@@ -1,8 +1,9 @@
 var mongoose = require('mongoose');
 //Modeling
-  var TodayMatchesSchema = new mongoose.Schema({
+  var TodayMatchSchema = new mongoose.Schema({
       title: String,
       href: String,
+      time: String,
       team1: {
           country: String,
           flag: {
@@ -38,5 +39,5 @@ var mongoose = require('mongoose');
           }
       }
   });
-  var TodayMatches = mongoose.model('TodayMatches', TodayMatchesSchema);
-  module.exports = TodayMatches;
+  var TodayMatch = mongoose.model('TodayMatch', TodayMatchSchema);
+  module.exports = TodayMatch;

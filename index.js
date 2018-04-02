@@ -16,7 +16,8 @@ express()
   .set('views', path.join(__dirname, 'views'))
   .set('view engine', 'ejs')
     .use('/score_api', score_api)
-    .use('/', index)
-//  .get('/', (req, res) => res.render('pages/index'))
+    //.use('/', index)
+    .get('/', (req, res) => res.render('pages/index'))
   .listen(PORT, () => console.log(`Listening on ${ PORT }`));
-mongoose.connect('mongodb://localhost:27017/local');
+//mongoose.connect('mongodb://localhost:27017/local');
+mongoose.connect('mongodb://heroku_hg2b3cm6:Delta1994@ds227119.mlab.com:27119/heroku_hg2b3cm6');
