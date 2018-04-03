@@ -6,11 +6,11 @@ const MONGOLAB_URI = process.env.MONGOLAB_URI || 'mongodb://localhost:27017/loca
 var score_api = require('./routes/score_api');
 var index = require('./routes/index');
 var mongoose = require('mongoose');
-
 var https = require("https");
-/*setInterval(function() {
+
+setInterval(function() {
     https.get("https://escore-server.herokuapp.com/score_api");
-}, 50000); // ping server to get data every 30s*/
+}, 50000); // ping server to get data every 30s
 
 express()
   .use(express.static(path.join(__dirname, 'public')))
