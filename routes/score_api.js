@@ -54,9 +54,15 @@ router.get('/',function (req, res) {
                 href: href,
                 time: time,
                 team1: {
-                    country: country1, flag: {src: src1}, name: name1, gamedata:{round: {score: scoreR1, class: classR1}, game: {score: scoreG1, class: classG1}}},
+                    country: country1, flag: {src: src1}, name: name1,
+                    gamedata:{
+                        round: {score: scoreR1, class: classR1},
+                        game: {score: scoreG1, class: classG1}}},
                 team2: {
-                    country: country2, flag: {src: src2}, name: name2, gamedata:{round: {score: scoreR2, class: classR2}, game: {score: scoreG2, class: classG2}}}
+                    country: country2, flag: {src: src2}, name: name2,
+                    gamedata:{
+                        round: {score: scoreR2, class: classR2},
+                        game: {score: scoreG2, class: classG2}}}
             });
 
          match.save(function (err, match) {
@@ -73,10 +79,10 @@ function timeout(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 async function getHLTV() {
-    const browser = await puppeteer.launch({args: ['--no-sandbox', '--disable-setuid-sandbox']});
+    const browser = await puppeteer.launch({args: ['--no-sandbox', '--disable-setuid-sandbox','--proxy-server=socks5://118.69.140.108:53281']});
     const page = await browser.newPage();
+
     await page.goto('https://www.hltv.org/');
-    await timeout(1000);
 
     let content = await page.content();
     const $ = cheerio.load(content);
