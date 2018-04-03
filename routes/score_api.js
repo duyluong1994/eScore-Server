@@ -58,12 +58,12 @@ router.get('/',function (req, res) {
                 team2: {
                     country: country2, flag: {src: src2}, name: name2, gamedata:{round: {score: scoreR2, class: classR2}, game: {score: scoreG2, class: classG2}}}
             });
-            (async () => {
-                await match.save(function (err, match) {
+
+         match.save(function (err, match) {
                     if (err) return console.error(err);
                     console.dir(match);
                 });
-            })();
+
         });
     });
     res.render('pages/score_api');
