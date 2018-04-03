@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const PORT = process.env.PORT || 5000;
+const MONGOLAB_URI = process.env.MONGOLAB_URI || 'mongodb://localhost:27017/local';
 
 var score_api = require('./routes/score_api');
 var index = require('./routes/index');
@@ -20,4 +21,4 @@ express()
     .get('/', (req, res) => res.render('pages/index'))
   .listen(PORT, () => console.log(`Listening on ${ PORT }`));
 //mongoose.connect('mongodb://localhost:27017/local');
-mongoose.connect('mongodb://heroku_hg2b3cm6:Delta1994@ds227119.mlab.com:27119/heroku_hg2b3cm6');
+mongoose.connect(MONGOLAB_URI);

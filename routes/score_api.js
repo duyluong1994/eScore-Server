@@ -8,27 +8,12 @@ var TodayMatch = require('../models/TodayMatch.js');
 
 // GET todayMatch
 router.get('/',function (req, res) {
-
-    function timeout(ms) {
-        return new Promise(resolve => setTimeout(resolve, ms));
-    }
-
-    var toDayMatches = new TodayMatch ([]);
+    //clear documents on collection
     TodayMatch.remove({},(error) => {
         console.error(error);
     });
 
-    async function getHLTV() {
-        const browser = await puppeteer.launch({args: ['--no-sandbox', '--disable-setuid-sandbox']});
-        const page = await browser.newPage();
-        await page.goto('https://www.hltv.org/');
-        await timeout(1000);
-
-        let content = await page.content();
-        const $ = cheerio.load(content);
-        await browser.close();
-        return $;
-    }
+    // crawl data todaymatches
     getHLTV().then($ => {
         $('.top-border-hide').find(".hotmatch-box.a-reset").each((_,ele) => {
 
@@ -84,3 +69,17 @@ router.get('/',function (req, res) {
     res.render('pages/score_api');
 });
 module.exports = router;
+function timeout(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+async function getHLTV() {
+    const browser = await puppeteer.launch({args: ['--no-sandbox', '--disable-setuid-sandbox']});
+    const page = await browser.newPage();
+    await page.goto('https://www.hltv.org/');
+    await timeout(1000);
+
+    let content = await page.content();
+    const $ = cheerio.load(content);
+    await browser.close();
+    return $;
+}
