@@ -84,7 +84,7 @@ async function getHLTV() {
     await page.goto('https://www.hltv.org/');
     timeout(1000);
     // use page.select
-    await page.select('select[name="timezone"]', 'Asia/Ho_Chi_Minh');
+    //await page.select('select[name="timezone"]', 'Asia/Ho_Chi_Minh');
     timeout(1000);
     let content = await page.content();
     const $ = cheerio.load(content);
