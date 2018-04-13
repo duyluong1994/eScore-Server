@@ -18,29 +18,35 @@ router.get('/',function (req, res) {
         $('.top-border-hide').find(".hotmatch-box.a-reset").each((_,ele) => {
 
             //get Game details
-            var href = ($(ele).attr('href'));
-            var title = ($(ele).attr('title'));
-            var time = $('.middleExtra',ele).text();
+            let href = ($(ele).attr('href'));
+            let title = ($(ele).attr('title'));
+            let time = $('.middleExtra',ele).text();
 
             //get teamrows
 
-                var country1 = $('.flag', '.teamrow', ele).first().attr('title');
-                var src1 = $('.flag', '.teamrow', ele).first().attr('src');
-                var name1 = $('.team', '.teamrow', ele).first().text();
+                //let country1 = $('.flag', '.teamrow', ele).first().attr('title');
+                let src1 = $('.flag', '.teamrow', ele).first().attr('src');
+                let name1 = $('.team', '.teamrow', ele).first().text();
+            console.log($('.teamrow', ele).next().html() + ` country2`);
+            //console.log($('.flag', '.teamrow', ele).next().attr('title') + ` country2`);
+                let scoreR1 = $('.livescore.twoRowExtraRow','.twoRowExtra', ele).first().children('span').first().text();
+                let classR1 = $('.livescore.twoRowExtraRow','.twoRowExtra', ele).first().children('span').first().attr('class');
+                let scoreG1 = $('.livescore.twoRowExtraRow','.twoRowExtra', ele).first().children('span').next().children('span').text();
+                let classG1 = $('.livescore.twoRowExtraRow','.twoRowExtra', ele).first().children('span').next().children('span').attr('class');
 
-                var scoreR1 = $('.livescore.twoRowExtraRow','.twoRowExtra', ele).first().children('span').first().text();
-                var classR1 = $('.livescore.twoRowExtraRow','.twoRowExtra', ele).first().children('span').first().attr('class');
-                var scoreG1 = $('.livescore.twoRowExtraRow','.twoRowExtra', ele).first().children('span').next().children('span').text();
-                var classG1 = $('.livescore.twoRowExtraRow','.twoRowExtra', ele).first().children('span').next().children('span').attr('class');
+                //let country2 = $('.flag', '.teamrow', ele).next().attr('title');
+                let src2 = $('.flag', '.teamrow', ele).next().attr('src');
+                let name2 = $('.team', '.teamrow', ele).next().text();
 
-                var country2 = $('.flag', '.teamrow', ele).next().attr('title');
-                var src2 = $('.flag', '.teamrow', ele).next().attr('src');
-                var name2 = $('.team', '.teamrow', ele).next().text();
 
-                var scoreR2 = $('.livescore.twoRowExtraRow','.twoRowExtra', ele).next().children('span').first().text();
-                var classR2 = $('.livescore.twoRowExtraRow','.twoRowExtra', ele).next().children('span').first().attr('class');
-                var scoreG2 = $('.livescore.twoRowExtraRow','.twoRowExtra', ele).next().children('span').next().children('span').text();
-                var classG2 = $('.livescore.twoRowExtraRow','.twoRowExtra', ele).next().children('span').next().children('span').attr('class');
+           /* console.log(src2 + ` src2`);
+            console.log(name2 + ` name2`);*/
+            //console.log(classG1 + ` classG1`);
+
+                let scoreR2 = $('.livescore.twoRowExtraRow','.twoRowExtra', ele).next().children('span').first().text();
+                let classR2 = $('.livescore.twoRowExtraRow','.twoRowExtra', ele).next().children('span').first().attr('class');
+                let scoreG2 = $('.livescore.twoRowExtraRow','.twoRowExtra', ele).next().children('span').next().children('span').text();
+                let classG2 = $('.livescore.twoRowExtraRow','.twoRowExtra', ele).next().children('span').next().children('span').attr('class');
 
 
 
@@ -49,7 +55,7 @@ router.get('/',function (req, res) {
             }else{
                 console.log($('.flag','.teamrow',ele).first().attr('title'));
             }*/
-            var match = new TodayMatch({
+            /*let match = new TodayMatch({
                 title: title,
                 href: href,
                 time: time,
@@ -67,8 +73,9 @@ router.get('/',function (req, res) {
 
          match.save(function (err, match) {
                     if (err) return console.error(err);
-                    console.dir(match);
-                });
+                    //console.dir(match);
+             //console.log(match);
+                });*/
 
         });
     });
