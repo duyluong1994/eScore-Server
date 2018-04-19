@@ -15,61 +15,61 @@ router.get('/',function (req, res) {
 
     // crawl data todaymatches
     getHLTV().then($ => {
-        $('.top-border-hide').find(".hotmatch-box.a-reset").each((_,ele) => {
+        $('.top-border-hide').find(".hotmatch-box.a-reset").each((i,ele) => {
 
             //get Game details
-            var href = ($(ele).attr('href'));
-            var title = ($(ele).attr('title'));
-            var time = $('.middleExtra',ele).text();
+            let href = ($(ele).attr('href'));
+            let title = ($(ele).attr('title'));
+            let time = $('.middleExtra',ele).text();
 
             //get teamrows
+            let country = [];
+            let src = [];
+            let name = [];
+            let scoreR = [];
+            let classR = [];
+            let scoreG = [];
+            let classG = [];
 
-                var country1 = $('.flag', '.teamrow', ele).first().attr('title');
-                var src1 = $('.flag', '.teamrow', ele).first().attr('src');
-                var name1 = $('.team', '.teamrow', ele).first().text();
+            $('.teamrows',ele).find('.flag').each((j,team) => {
+                country[j] = $(team).attr('title');
+                src[j] = $(team).attr('src');
+            });
+            $('.teamrows',ele).find('.team').each((j,team) => {
+                name[j] = $(team).text();
+            });
+            $('.twoRowExtra',ele).find('.livescore.twoRowExtraRow').each((j,team) => {
+                $(team).find('span').each((n,span) => {
+                    if(n == 0){
+                        scoreR[j] = $(span).text();
+                        classR[j] = $(span).attr('class');
+                    }
+                    if(n == 1) {
+                        scoreG[j] = $(span).text();
+                        classG[j] = $(span).attr('class');
+                    }
+                });
+            });
 
-                var scoreR1 = $('.livescore.twoRowExtraRow','.twoRowExtra', ele).first().children('span').first().text();
-                var classR1 = $('.livescore.twoRowExtraRow','.twoRowExtra', ele).first().children('span').first().attr('class');
-                var scoreG1 = $('.livescore.twoRowExtraRow','.twoRowExtra', ele).first().children('span').next().children('span').text();
-                var classG1 = $('.livescore.twoRowExtraRow','.twoRowExtra', ele).first().children('span').next().children('span').attr('class');
-
-                var country2 = $('.flag', '.teamrow', ele).next().attr('title');
-                var src2 = $('.flag', '.teamrow', ele).next().attr('src');
-                var name2 = $('.team', '.teamrow', ele).next().text();
-
-                var scoreR2 = $('.livescore.twoRowExtraRow','.twoRowExtra', ele).next().children('span').first().text();
-                var classR2 = $('.livescore.twoRowExtraRow','.twoRowExtra', ele).next().children('span').first().attr('class');
-                var scoreG2 = $('.livescore.twoRowExtraRow','.twoRowExtra', ele).next().children('span').next().children('span').text();
-                var classG2 = $('.livescore.twoRowExtraRow','.twoRowExtra', ele).next().children('span').next().children('span').attr('class');
-
-
-
-            /*if($(ele).find('.teamrow').first().html() == null){
-                console.log($(ele).find('.placeholderrow').first().html());
-            }else{
-                console.log($('.flag','.teamrow',ele).first().attr('title'));
-            }*/
-            var match = new TodayMatch({
+            let match = new TodayMatch({
                 title: title,
                 href: href,
                 time: time,
                 team1: {
-                    country: country1, flag: {src: src1}, name: name1,
+                    country: country[0], flag: {src: src[0]}, name: name[0],
                     gamedata:{
-                        round: {score: scoreR1, class: classR1},
-                        game: {score: scoreG1, class: classG1}}},
+                        round: {score: scoreR[0], class: classR[0]},
+                        game: {score: scoreG[0], class: classG[0]}}},
                 team2: {
-                    country: country2, flag: {src: src2}, name: name2,
+                    country: country[1], flag: {src: src[1]}, name: name[1],
                     gamedata:{
-                        round: {score: scoreR2, class: classR2},
-                        game: {score: scoreG2, class: classG2}}}
+                        round: {score: scoreR[1], class: classR[1]},
+                        game: {score: scoreG[1], class: classG[1]}}}
             });
 
          match.save(function (err, match) {
                     if (err) return console.error(err);
-                    console.dir(match);
                 });
-
         });
     });
     res.render('pages/score_api');
