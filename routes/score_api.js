@@ -15,7 +15,7 @@ router.get('/',function (req, res) {
 
     // crawl data todaymatches
     getHLTV().then($ => {
-        $('.top-border-hide').find(".hotmatch-box.a-reset").each((i,ele) => {
+        $('.top-border-hide').find(".hotmatch-box.a-reset").each((_,ele) => {
 
             //get Game details
             let href = ($(ele).attr('href'));
@@ -69,6 +69,8 @@ router.get('/',function (req, res) {
 
          match.save(function (err, match) {
                     if (err) return console.error(err);
+                    console.dir(match);
+             console.log(match);
                 });
         });
     });
@@ -79,13 +81,13 @@ function timeout(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 async function getHLTV() {
-    const browser = await puppeteer.launch({args: ['--no-sandbox', '--disable-setuid-sandbox']});
+    const browser = await puppeteer.launch({args: ['--no-sandbox', '--disable-setuid-sandbox'],headless: false});
     const page = await browser.newPage();
     await page.goto('https://www.hltv.org/');
-    timeout(1000);
+    timeout(10000);
     // use page.select
     await page.select('select[name="timezone"]', 'Asia/Ho_Chi_Minh');
-    timeout(1000);
+    timeout(3000);
     let content = await page.content();
     const $ = cheerio.load(content);
     await browser.close();
