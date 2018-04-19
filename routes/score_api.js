@@ -45,8 +45,8 @@ router.get('/',function (req, res) {
                         classR[j] = $(span).attr('class');
                     }
                     if(n == 1) {
-                        scoreG[j] = $(span).text();
-                        classG[j] = $(span).attr('class');
+                        scoreG[j] = $('span',span).text();
+                        classG[j] = $('span',span).attr('class');
                     }
                 });
             });
@@ -84,7 +84,7 @@ async function getHLTV() {
     const browser = await puppeteer.launch({args: ['--no-sandbox', '--disable-setuid-sandbox'],headless: false});
     const page = await browser.newPage();
     await page.goto('https://www.hltv.org/');
-    timeout(10000);
+    timeout(30000);
     // use page.select
     await page.select('select[name="timezone"]', 'Asia/Ho_Chi_Minh');
     timeout(3000);
