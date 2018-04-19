@@ -81,14 +81,20 @@ function timeout(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 async function getHLTV() {
-    const browser = await puppeteer.launch({args: ['--no-sandbox', '--disable-setuid-sandbox']});
+    const browser = await puppeteer.launch({args: ['--no-sandbox', '--disable-setuid-sandbox'],headless: false});
     const page = await browser.newPage();
     await page.goto('https://www.hltv.org/');
-    timeout(30000);
+
     // use page.select
     await page.select('select[name="timezone"]', 'Asia/Ho_Chi_Minh');
-    timeout(3000);
+    await page.evaluate(() => {
+        return Promise.resolve(window.scrollTo(0,document.body.scrollHeight));
+    });
+
+    await page.waitFor(1000);
+
     let content = await page.content();
+    //timeout(90000000);
     const $ = cheerio.load(content);
     await browser.close();
     return $;
