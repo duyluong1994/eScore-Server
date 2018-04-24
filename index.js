@@ -12,12 +12,18 @@ setInterval(function() {
     https.get("https://escore-server.herokuapp.com/score_api");
 }, 50000); // ping server to get data every 30s
 
+// Serve static files from the React app
+
+
 express()
-  .use(express.static(path.join(__dirname, 'public')))
+  //.use(express.static(path.join(__dirname, 'public')))
+    .use(express.static(path.join(__dirname, 'client/build')))
   .set('views', path.join(__dirname, 'views'))
   .set('view engine', 'ejs')
     .use('/score_api', score_api)
     //.use('/', index)
-    .get('/', (req, res) => res.render('pages/index'))
+    .get('*', (req, res) => {
+        res.sendFile(path.join(__dirname+'/client/build/index.html'));
+    })
   .listen(PORT, () => console.log(`Listening on ${ PORT }`));
 mongoose.connect(MONGOLAB_URI);
