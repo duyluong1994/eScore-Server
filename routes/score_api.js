@@ -74,7 +74,7 @@ router.get('/',function (req, res) {
                 });
         });
     });
-    res.render('pages/score_api');
+    res.send('api escore runing');
 });
 module.exports = router;
 function timeout(ms) {
