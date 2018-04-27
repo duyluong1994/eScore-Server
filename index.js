@@ -9,7 +9,7 @@ var mongoose = require('mongoose');
 var https = require("https");
 
 setInterval(function() {
-    https.get("https://escore-server.herokuapp.com/score_api");
+    https.get("https://lupo-solitario.herokuapp.com/score_api");
 }, 50000); // ping server to get data every 30s
 
 // Serve static files from the React app
